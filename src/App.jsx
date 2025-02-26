@@ -8,8 +8,13 @@ const App = () => {
     setValue(e.target.value);
   };
 
-  const handleClick = () => {
-    addTask(value);
+  const handleClick = (value) => {
+    if (tasks.includes(value)) {
+      console.log("already exist");
+    } else {
+      addTask(value);
+    }
+    setValue("");
   };
 
   console.log("tasks", tasks);
@@ -27,10 +32,10 @@ const App = () => {
         onChange={handleChange}
         value={value}
       />
-      <button onClick={handleClick}>Add Task</button>
+      <button onClick={() => handleClick(value)}>Add Task</button>
       <div>
-        {tasks.map((task) => (
-          <div key={task}>
+        {tasks.map((task, i) => (
+          <div key={i}>
             <h2>{task}</h2>
             <button onClick={handleRemoveClick(task)}> remove </button>
           </div>
